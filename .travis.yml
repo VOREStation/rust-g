@@ -2,6 +2,10 @@ language: rust
 cache: cargo
 rust:
   - stable
-script:
+# Install the components for 32 bit cross-compiling
+before_install:
+  - rustup target add i686-unknown-linux-gnu
+install:
   - cargo build --verbose --target i686-unknown-linux-gnu
-  - cargo test --verbose --all
+script:
+  - cargo test --verbose --target i686-unknown-linux-gnu
